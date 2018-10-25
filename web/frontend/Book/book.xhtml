@@ -1,0 +1,83 @@
+<?xml version='1.0' encoding='UTF-8' ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+
+<ui:composition template="/frontend/template/layout.xhtml"
+                xmlns="http://www.w3.org/1999/xhtml"
+                xmlns:h="http://xmlns.jcp.org/jsf/html"
+                xmlns:f="http://xmlns.jcp.org/jsf/core"
+                xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
+                xmlns:p="http://primefaces.org/ui">
+    <ui:define name="content" >
+        <style>
+            .speech-bubble { position: relative; background: #00aabb; border-radius: .4em; } 
+        </style>
+        <style>
+            .speech-bubble:after { content: ''; position: absolute; top: 0; left: 50%; width: 0; height: 0; border: 20px solid transparent; border-bottom-color: #00aabb; border-top: 0; border-left: 0; margin-left: -10px; margin-top: -20px; }
+        </style>
+        <div class ="container">
+            <div class="row">
+                <h:form enctype="multipart/form-data" id="furun-form">
+                    <ui:repeat value="#{frontendBookBean.detail()}" var="book1">
+                        <div class="col-sm-5">
+                            <div class="panel w3-win8-steel">
+                                <div class="panel-heading">RESİMLER</div>
+                                <ui:repeat value="#{book1.bookImageList}" var="resim">                                   
+                                    <h:panelGroup  rendered="#{resim.type.contains('image')}">
+                                        <h:graphicImage value="image/#{resim.name}" width="227,5" height="225"/>
+                                    </h:panelGroup>
+                                </ui:repeat> <br/>
+                                <h3 >ÖZELLİKLER</h3>
+                                <h5 > Kitap Adı : #{book1.book_name} </h5> 
+                                <h5 > Kategori : #{book1.category.category_name} </h5> 
+                                <h5 > Yazar : #{book1.author.name_surname}</h5> 
+                                <h5 > Basım :  #{book1.date_of_issue}</h5> 
+                                <h5 > Like :  #{book1.bookLikeCount}</h5> 
+                                <h5 > Dislike :  #{book1.bookDisLikeCount}</h5> 
+                                <h5 > Comment :  #{book1.bookCommentCount}</h5> 
+                                <br/>
+                                <h3>YORUMLAR</h3>                                        
+                                <ui:repeat value="#{book1.bookCommentList}" var="comment">
+                                    <h:commandLink>
+                                        <span class="btn-sm btn-default glyphicon glyphicon-user"> #{comment.user.name_surname}</span>
+                                        <f:ajax execute="@this" render="@form" />
+                                    </h:commandLink>
+                                    <h5 class="text-secondary">
+                                        <p:panel class="speech-bubble">
+                                            <h:commandLink   action="#{frontendYorumBean.updateForm(comment)}"   value="#{comment.comment}">
+                                                <f:ajax execute="furun-form" render="fyorum-form furun-form"/>
+                                            </h:commandLink>
+                                        </p:panel>
+                                    </h5>
+                                    <br/>
+                                </ui:repeat>
+                            </div>
+
+                        </div>
+                    </ui:repeat>
+                </h:form>
+                <div class="col-sm-5">
+                    <h:form id="fyorum-form" rendered="#{user.user_id!=null}">
+                        <div class="form-group">
+                            <h:inputHidden value="#{frontendYorumBean.yorum.comment_id}"/>
+                            <label for="inputName">Yorumunuz</label>
+                            <h:inputTextarea styleClass="form-control" value="#{frontendYorumBean.yorum.comment}"/>                                                              
+                        </div>
+                        <div class="form-group">
+                            <div class="btn-group">
+                                <h:commandButton rendered="#{frontendYorumBean.yorum.comment_id != null}" styleClass="btn btn-danger" value="Delete" action="#{frontendYorumBean.delete()}">
+                                    <f:ajax execute="fyorum-form" render="fyorum-form furun-form "/> 
+                                </h:commandButton>
+                                <h:commandButton rendered="#{frontendYorumBean.yorum.comment_id  == null}" styleClass="btn btn-primary" value="Create" action="#{frontendYorumBean.create()}">
+                                    <f:ajax execute="fyorum-form" render="fyorum-form furun-form"/>                                   
+                                </h:commandButton>
+                                <h:commandButton rendered="#{frontendYorumBean.yorum.comment_id  != null}" styleClass="btn btn-secondary" value="Clear Form" action="#{frontendYorumBean.clearForm()}">                                 
+                                    <f:ajax execute="@this" render="fyorum-form"/>
+                                </h:commandButton>
+                            </div>
+                        </div>
+                    </h:form>
+                </div>
+            </div>               
+        </div>
+    </ui:define>
+</ui:composition>

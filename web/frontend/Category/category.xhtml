@@ -1,0 +1,25 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+    "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<ui:composition xmlns="http://www.w3.org/1999/xhtml"
+                xmlns:ui="http://java.sun.com/jsf/facelets"
+                xmlns:h="http://xmlns.jcp.org/jsf/html"
+                xmlns:f="http://xmlns.jcp.org/jsf/core"> 
+    <h:form id="fkategori-form">
+        <div class="btn btn-group-vertical" style="background-color: #ddd">
+            <h3 class="text-secondary">
+                Tüm Kategoriler
+            </h3>
+            <h:commandButton action="#{frontendBookBean.updateKategori1()}" styleClass="btn w3-win8-steel" value="Hepsi">
+                <f:ajax execute="fkategori-form" render="fkategori-form furun-table"/>
+            </h:commandButton> 
+            <br/>
+            <ui:repeat value="#{categoryBean.kategoriList}" var="category">
+                <h:commandButton action="#{frontendBookBean.updateKategori(category)}" styleClass="btn w3-win8-steel" value="#{category.category_name}">
+                    <f:ajax execute="fkategori-form" render="fkategori-form furun-table"/>
+                </h:commandButton> 
+                <br/>
+            </ui:repeat>
+        </div>
+    </h:form>
+</ui:composition>

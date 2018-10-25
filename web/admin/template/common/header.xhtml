@@ -1,0 +1,60 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+    "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<ui:composition xmlns="http://www.w3.org/1999/xhtml"
+                xmlns:ui="http://java.sun.com/jsf/facelets"
+                xmlns:h="http://xmlns.jcp.org/jsf/html">
+    <body>
+        <h:form>
+            <nav class="navbar navbar-inverse">
+                <div class="container-fluid">
+                    <!-- Brand and toggle get grouped for better mobile display -->
+                    <div class="navbar-header">
+                        <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#bs-example-navbar-collapse-1" aria-expanded="false">
+                            <span class="sr-only">Toggle navigation</span>
+                            <span class="icon-bar"></span>
+                            <span class="icon-bar"></span>
+                            <span class="icon-bar"></span>
+                        </button>
+                        <h:commandLink class="navbar-brand" action="/admin/index?faces-redirect=true" value="KİTABI SEVENLER"/>
+                    </div>
+
+                    <!-- Collect the nav links, forms, and other content for toggling -->
+                    <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
+                        <ul class="nav navbar-nav">
+                            <li>
+                                <h:commandLink action="/admin/role/role?faces-redirect=true" value="ROLE"/>
+                            </li>
+                            <li>
+                                <h:commandLink action="/admin/category/category?faces-redirect=true" value="KATEGORİ"/>
+                            </li>
+                            <li>
+                                <h:commandLink action="/admin/like/like?faces-redirect=true" value="BEĞENİ"/>
+                            </li>
+                            <li>
+                                <h:commandLink action="/admin/comment/comment?faces-redirect=true" value="YORUM"/>
+                            </li>
+                            <li>
+                                <h:commandLink action="/admin/user/user?faces-redirect=true" value="KULLANICI"/>
+                            </li>
+                            <li>
+                                <h:commandLink action="/admin/book/book?faces-redirect=true" value="KİTAPLAR"/>
+                            </li>
+                            <li>
+                                <h:commandLink action="/admin/author/author?faces-redirect=true" value="YAZAR"/>
+                            </li>
+                            <li>
+                                <h:commandLink action="/admin/file/file?faces-redirect=true" value="RESİM"/>
+                            </li>
+                        </ul>	
+                        <ul class="nav navbar-nav navbar-right">
+                            <li><h:commandLink action="/admin/user/user?faces-redirect=true" value="#{user.name_surname}" /></li>
+                            <li><h:commandLink action="#{loginBean.doLogout()}" value="LOGOUT" /></li>
+                        </ul>
+                    </div><!-- /.navbar-collapse -->
+                </div><!-- /.container-fluid -->
+            </nav>
+        </h:form>
+    </body>
+</ui:composition>
+

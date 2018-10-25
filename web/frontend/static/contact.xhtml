@@ -1,0 +1,64 @@
+<?xml version='1.0' encoding='UTF-8' ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:h="http://xmlns.jcp.org/jsf/html"
+      xmlns:ui="http://xmlns.jcp.org/jsf/facelets">
+    <h:head>
+        <title>Facelet Title</title>
+        <meta charset="utf-8"/>
+        <meta name="viewport" content="width=device-width, initial-scale=1"/>
+        <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css"/>
+        <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.4/jquery.min.js"></script>
+        <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
+
+    </h:head>
+    <h:body>
+        <ui:composition template="/frontend/template/layout.xhtml">
+            <ui:define name="content">
+
+                <div class="container-fluid bg-grey">
+                    <h2 class="text-center">CONTACT</h2>
+                    <div class="row">
+                        <div class="col-sm-5">
+                            <p>Bize ulaşın</p>
+                            <p><span class="glyphicon glyphicon-map-marker"></span> Malatya, TR</p>
+                            <p><span class="glyphicon glyphicon-phone"></span> +90 5070288937</p>
+                            <p><span class="glyphicon glyphicon-envelope"></span> eda.yzn5@gmail.com</p>
+                        </div>
+                        <div class="col-sm-7">
+                            <div class="row">
+                                <div class="col-sm-6 form-group">
+                                    <input class="form-control" id="name" name="name" placeholder="Name" type="text" />
+                                </div>
+                                <div class="col-sm-6 form-group">
+                                    <input class="form-control" id="email" name="email" placeholder="Email" type="email" />
+                                </div>
+                            </div>
+                            <textarea class="form-control" id="comments" name="comments" placeholder="Comment" rows="5"></textarea><br/>
+                            <div class="row">
+                                <div class="col-sm-12 form-group">
+                                    <button class="btn btn-default pull-right" type="submit">Send</button>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div id="googleMap" style="height:400px;width:100%;"></div>
+                <script>
+                    function myMap() {
+                        var myCenter = new google.maps.LatLng(38.3444, 37.9684);
+                        var mapProp = {center: myCenter, zoom: 12, scrollwheel: false, draggable: false, mapTypeId: google.maps.MapTypeId.ROADMAP};
+                        var map = new google.maps.Map(document.getElementById("googleMap"), mapProp);
+                        var marker = new google.maps.Marker({position: myCenter});
+                        marker.setMap(map);
+                    }
+                </script>
+                <script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyBu-916DdpKAjTmJNIgngS6HL_kDIKU0aU&amp;callback=myMap"></script>
+            </ui:define>
+            <ui:define name="category">
+
+            </ui:define>
+        </ui:composition>
+    </h:body>
+</html>
+

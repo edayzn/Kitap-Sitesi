@@ -1,0 +1,51 @@
+<?xml version='1.0' encoding='UTF-8' ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<ui:composition             xmlns="http://www.w3.org/1999/xhtml"
+                            xmlns:h="http://xmlns.jcp.org/jsf/html"
+                            xmlns:f="http://xmlns.jcp.org/jsf/core"
+                            xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
+                            xmlns:a="http://xmlns.jcp.org/jsf/passthrough">
+
+    <h:form id="author-table">
+        <h:dataTable styleClass="table table-striped table-bordered" value="#{authorBean.authorPageList}" var="author">
+            <f:facet name="header" class="text-center">
+                <div class="text-center">
+                    <h:outputText class="text-danger text-center" value="YAZAR TABLOSU"/>
+                </div>
+            </f:facet>
+            <h:column>
+                <f:facet name="header">Yazar ID</f:facet>
+                    #{author.author_id}                    
+            </h:column>
+            <h:column>
+                <f:facet name="header">Ad Soyad </f:facet>
+                    #{author.name_surname}     
+            </h:column>
+
+            <h:column>
+                <f:facet name="header">Güncelle</f:facet>
+                <h:commandButton   styleClass="btn btn-sm btn-info" action="#{authorBean.updateForm(author)}" value="Güncelle">
+                    <f:ajax execute="@this" render=" author-form author-tablosu"/>
+                </h:commandButton> 
+            </h:column>
+            <h:column>
+                <f:facet name="header">Sil</f:facet>
+                <h:commandButton onclick="$('#exampleModal').modal('show')"  styleClass="btn btn-sm btn-danger" action="#{authorBean.deleteConfirm(author)}" value="Sil">
+                    <f:ajax execute="@this" render="exampleModal  author-bilgi"/>
+                </h:commandButton> 
+            </h:column>
+            <f:facet name="footer" class="text-center">
+                <div class="btn-group text-center">
+                    <h:form>
+                        <h:commandButton action="#{authorBean.previous()}" value="Önceki" styleClass="btn btn-secondary">
+                            <f:ajax execute="@this" render="author-table"/>
+                        </h:commandButton>
+                        <h:commandButton  action="#{authorBean.next()}" value="Sonraki" styleClass="btn btn-secondary">
+                            <f:ajax execute="@this" render="author-table"/>
+                        </h:commandButton>
+                    </h:form>
+                </div>
+            </f:facet>
+        </h:dataTable>
+    </h:form> 
+</ui:composition>

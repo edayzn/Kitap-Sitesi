@@ -1,0 +1,46 @@
+<?xml version='1.0' encoding='UTF-8' ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<ui:composition 
+    xmlns="http://www.w3.org/1999/xhtml"
+    xmlns:h="http://xmlns.jcp.org/jsf/html"
+    xmlns:f="http://xmlns.jcp.org/jsf/core"
+    xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
+    xmlns:a="http://xmlns.jcp.org/jsf/passthrough">
+
+    <h:form id="book-form">
+        <div class="form-group">
+            <h:inputHidden value="#{bookBean.book.book_id}"/>
+            <label for="inputName">Kitap Name</label>
+            <h:inputText id='book-name'  styleClass="form-control" value="#{bookBean.book.book_name}"/>
+            <h:message for="book-name" styleClass="text-danger" />
+            <br/>         
+            <div>
+                <label for="inputName">Yazar</label><br/>
+                <h:selectOneMenu class="form-control"  value="#{bookBean.book.author}" converter="authorConverter">
+                    <f:selectItems value="#{bookBean.authorBean.authorList}" var="Author" itemValue="#{Author}" itemLabel="#{Author.name_surname}" />
+                </h:selectOneMenu>
+            </div>
+             <br/>  
+            <div>
+                <label for="inputName">Kategori</label><br/>
+                <h:selectOneMenu class="form-control" id="selectKategori" value="#{bookBean.book.category}" converter="categoryConverter">
+                    <f:selectItems value="#{bookBean.categoryBean.kategoriList}" var="Kategori" itemValue="#{Kategori}" itemLabel="#{Kategori.category_name}" />
+                </h:selectOneMenu>
+            </div>                          
+        </div>
+        <div class="form-group">
+            <div class="btn-group">
+                <h:commandButton rendered="#{bookBean.book.book_id != null}" styleClass="btn btn-info" value="Güncelle" action="#{bookBean.update}">
+                    <f:ajax execute="book-form" render="book-form book-table"/>
+                </h:commandButton>
+                <h:commandButton rendered="#{bookBean.book.book_id == null}" styleClass="btn btn-primary" value="Kaydet" action="#{bookBean.create}">
+                    <f:ajax execute="book-form" render="book-form book-table"/>
+                </h:commandButton>
+                <h:commandButton rendered="#{bookBean.book.book_id != null}" styleClass="btn btn-secondary" value="Temizle" action="#{bookBean.clearForm}">
+                    <f:ajax execute="@this" render="book-form book-table"/>
+                </h:commandButton>                                                              
+            </div>
+        </div>
+    </h:form>
+</ui:composition>
+

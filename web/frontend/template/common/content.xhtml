@@ -1,0 +1,44 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+    "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+
+<ui:composition xmlns="http://www.w3.org/1999/xhtml"
+                xmlns:ui="http://java.sun.com/jsf/facelets"
+                xmlns:h="http://xmlns.jcp.org/jsf/html"
+                xmlns:f="http://xmlns.jcp.org/jsf/core"> 
+
+    <div class ="container">
+        <h:form enctype="multipart/form-data" id="fbook-table">
+            <ui:repeat value="#{frontendBookBean.bookList}" var="book">
+                <div class="col-md-3">
+                    <div class="panel w3-win8-steel" >
+                        <div class="panel-heading">
+                            <h:commandButton action="#{frontendBookBean.updateForm(book)}" styleClass="btn w3-win8-steel" style="color: #ffffff" value="#{book.book_name}"/>
+                        </div>
+                        <ui:repeat value="#{book.bookImageList}" var="resim">                                   
+                            <h:panelGroup  rendered="#{resim.type.contains('image')}">
+                                <h:graphicImage value="image/#{resim.name}" class="img-rounded" width="253" height="280"/>
+                            </h:panelGroup>
+                        </ui:repeat>    
+                        <br/>   
+                        <div class="btn-group">
+                            <h:commandLink action="#{likeBean.replace1(book,true)}">
+                                <span class="btn-sm btn-default glyphicon glyphicon-thumbs-up"> #{book.bookLikeCount}</span>
+                                <f:ajax execute="@this" render="@form" />
+                            </h:commandLink>
+                            <h:commandLink action="#{likeBean.replace1(book,false)}">
+                                <span class="btn-sm btn-default glyphicon glyphicon-thumbs-down"> #{book.bookDisLikeCount}</span>
+                                <f:ajax execute="@this" render="@form" />
+                            </h:commandLink>
+                            <h:commandLink action="#{frontendBookBean.updateForm(book)}">
+                                <span class="btn-sm btn-default glyphicon glyphicon-comment"> #{book.bookCommentCount}</span>
+                                <f:ajax execute="@this" render="@form" />
+                            </h:commandLink>
+                        </div>
+
+                    </div>    
+                </div>                    
+            </ui:repeat>                  
+        </h:form>         
+    </div>
+</ui:composition>

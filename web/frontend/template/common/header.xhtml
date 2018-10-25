@@ -1,0 +1,42 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+    "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+
+<ui:composition xmlns="http://www.w3.org/1999/xhtml"
+                xmlns:ui="http://java.sun.com/jsf/facelets"
+                xmlns:h="http://xmlns.jcp.org/jsf/html"
+                xmlns:a="http://xmlns.jcp.org/jsf/passthrough">
+    <h:form>
+        <nav class="navbar  w3-win8-steel">
+            <div class="container-fluid">
+                <!-- Brand and toggle get grouped for better mobile display -->
+                <div class="navbar-header">                        
+                    <h:commandLink class="navbar-brand " action="/frontend/index?faces-redirect=true" value="HOME"/>
+                </div>
+                <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
+                    <ul class="nav navbar-nav">
+                        <li>
+                            <h:commandLink action="/frontend/static/about?faces-redirect=true" value="ABOUT"/>
+                        </li>
+                        <li>
+                            <h:commandLink action="/frontend/static/contact?faces-redirect=true" value="CONTACT"/>
+                        </li>                                             
+                    </ul>
+                    <ul class="nav navbar-nav navbar-right">
+                        <li class="dropdown">
+                            <a class="dropdown-toggle " data-toggle="dropdown" href="#">My Account
+                                <span class="caret"></span>
+                            </a>
+                            <ul class="dropdown-menu">
+                                <li><h:commandLink rendered="#{user.user_id == null}" class="glyphicon glyphicon-user" action="/admin/login?faces-redirect=true" value=" Sign Up"/></li>
+                                <li><h:commandLink rendered="#{user.user_id != null}" action="/frontend/userBilgi/userBilgi?faces-redirect=true"  class="glyphicon glyphicon-king" value=" #{user.name_surname}"/></li>
+                                <li><h:commandLink class="glyphicon glyphicon-check"  action="/frontend/uyeOl/uyeOl?faces-redirect=true"  value=" Üye Ol"/></li>
+                                <li><h:commandLink rendered="#{user.user_id != null}" class="glyphicon glyphicon-log-out" action="#{loginBean.doLogout()}" value=" Logout"/></li>
+                            </ul>
+                        </li>
+                    </ul>
+                </div>
+            </div>
+        </nav>
+    </h:form>
+</ui:composition>

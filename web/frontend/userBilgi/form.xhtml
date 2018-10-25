@@ -1,0 +1,38 @@
+<?xml version='1.0' encoding='UTF-8' ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<ui:composition
+    xmlns="http://www.w3.org/1999/xhtml"
+    xmlns:h="http://xmlns.jcp.org/jsf/html"
+    xmlns:f="http://xmlns.jcp.org/jsf/core"
+    xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
+    xmlns:a="http://xmlns.jcp.org/jsf/passthrough">
+
+    <h:form id="isim-form" rendered="#{user.user_id!=null}">
+        <div class="form-group">
+            <h:inputHidden value="#{userBean.user.user_id}" />
+            <label for="inputName" > Name Surname</label>
+            <h:inputText id='user-gname'  styleClass="form-control" value="#{frontendUserBean.users.name_surname}" a:placeholder="Enter Name Surname"/>
+            <br/>
+            <label for="inputEmail" > Email</label>
+            <h:inputText id='user-gemail'  styleClass="form-control" value="#{frontendUserBean.users.email}"   a:placeholder="Enter Email" />
+            <br/>
+            <label for="inputPassword" > Password</label>
+            <h:inputSecret id='user-fpassword'  styleClass="form-control" value="#{frontendUserBean.users.password}" a:placeholder="Enter Password"/>
+            <br/>  
+        </div>
+        <div class="form-group">
+            <div class="btn-group">
+                <h:commandButton  rendered="#{frontendUserBean.users.user_id !=null}" styleClass="btn btn-info" value="Güncelle" action="#{frontendUserBean.update()}">
+                    <f:ajax execute="isim-form" render="isim-form isim-table"/>
+                </h:commandButton>
+                <h:commandButton rendered="#{frontendUserBean.users.user_id !=null}" styleClass="btn btn-primary" value="Hesabı Sil" action="#{frontendUserBean.delete()}">
+                    <f:ajax execute="isim-form" render="isim-form isim-table"/>
+                </h:commandButton>
+                <h:commandButton rendered="#{frontendUserBean.users.user_id!=null}"  styleClass="btn btn-secondary" value="Temizle" action="#{frontendUserBean.clearForm()}">
+                    <f:ajax execute="@this" render="isim-form"/>
+                </h:commandButton>
+            </div>
+        </div>
+    </h:form>
+</ui:composition>
+

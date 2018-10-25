@@ -1,0 +1,53 @@
+<?xml version='1.0' encoding='UTF-8' ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<ui:composition
+    xmlns="http://www.w3.org/1999/xhtml"
+    xmlns:h="http://xmlns.jcp.org/jsf/html"
+    xmlns:f="http://xmlns.jcp.org/jsf/core"
+    xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
+    xmlns:a="http://xmlns.jcp.org/jsf/passthrough">
+
+    <h:form id="role-table">
+        <h:dataTable styleClass="table table-striped table-bordered" value="#{roleBean.rolePageList}" var="role">
+            <f:facet name="header" class="text-center">
+                <div class="text-center">
+                    <h:outputText class="text-danger text-center" value="ROLE TABLOSU"/>
+                </div>
+            </f:facet>
+            <h:column>
+                <f:facet name="header">Role ID</f:facet>
+                    #{role.role_id}                    
+            </h:column>
+            <h:column>
+                <f:facet name="header">Role Name</f:facet>
+                    #{role.role_adi}        
+            </h:column>
+            <h:column>
+                <f:facet name="header">Güncelle</f:facet>
+                <h:commandButton   styleClass="btn btn-sm btn-info" action="#{roleBean.updateForm(role)}" value="Güncelle">
+                    <f:ajax execute="@this" render=" role-form role-tablosu"/>
+                </h:commandButton> 
+            </h:column>
+            <h:column>
+                <f:facet name="header">Sil</f:facet>
+                <h:commandButton onclick="$('.modal').modal('show')"  styleClass="btn btn-sm btn-danger" action="#{roleBean.deleteConfirm(role)}" value="Sil">
+                    <f:ajax execute="@this" render="exampleModal role-form role-bilgi"/>
+                </h:commandButton> 
+            </h:column>
+            <f:facet name="footer" class="text-center">
+                <div class="btn-group text-center">
+                    <h:form>
+                        <h:commandButton class="text-center"  action="#{roleBean.previous()}" value="Önceki" styleClass="btn btn-secondary">
+                            <f:ajax execute="@this" render="role-table"/>
+                        </h:commandButton>
+                        <h:commandButton class="text-center" action="#{roleBean.next()}" value="Sonraki" styleClass="btn btn-secondary">
+                            <f:ajax execute="@this" render="role-table"/>
+                        </h:commandButton>
+                    </h:form>
+                </div>
+            </f:facet>
+        </h:dataTable>
+    </h:form> 
+
+
+</ui:composition>

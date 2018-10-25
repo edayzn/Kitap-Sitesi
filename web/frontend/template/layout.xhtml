@@ -1,0 +1,80 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+    "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:h="http://java.sun.com/jsf/html"
+      xmlns:ui="http://java.sun.com/jsf/facelets" lang="en">
+    <h:head>
+        <title>Frontend Panel</title>
+        <h:outputStylesheet library="css" name="bootstrap-theme.css"/>
+        <h:outputStylesheet name="css/bootstrap.css" library="admin" />
+        <h:outputStylesheet name="css/bootstrap.min.css" library="admin" />
+        <h:outputStylesheet name="css/custom.css" library="admin" />
+        <h:outputScript name="js/jquery.js" library="admin" />
+        <h:outputScript name="js/bootstrap.js" library="admin" />
+        <h:outputStylesheet name="css/font-awesome.min.css" library="admin" />
+        <h:outputScript name="js/jquery-1.12.4.min.js" library="admin" />
+        <h:outputScript name="js/jquery-3.3.1.min.js" library="admin" />
+        <h:outputScript name="js/jquery-3.3.1.js" library="admin" />
+        <h:outputScript name="js/bootstrap.min.js" library="admin" />
+        <h:outputStylesheet library="css" name="bootstrap.css"/>
+        <h:outputScript library="js" name="bootstrap.js"/>
+        
+        <h:outputStylesheet name="css/w3.css" library="admin" />
+        <h:outputStylesheet name="css/w3-colors-win8.css" library="admin" />
+        <h:outputStylesheet name="css/w3-colors-vivid.css" library="admin" />
+        <h:outputStylesheet name="css/w3-colors-food.css" library="admin" />
+        
+         
+        <style>
+            /* Remove the navbar's default rounded borders and increase the bottom margin */ 
+            .navbar {
+                margin-bottom: 50px;
+                border-radius: 0;
+            }
+
+            /* Remove the jumbotron's default bottom margin */ 
+            .jumbotron {
+                margin-bottom: 0;
+            }
+
+            /* Add a gray background color and some padding to the footer */
+            footer {
+                background-color: #f2f2f2;
+                padding: 25px;
+            }
+        </style>
+        <style>
+            .bg-4 {
+                background-color: #2f2f2f;
+                color: #ffffff;
+            }
+        </style>
+     
+    </h:head>
+    <h:body>           
+        <div id="page">
+            <ui:insert name="header" >
+                <ui:include src="/frontend/template/common/header.xhtml" />
+            </ui:insert>
+            <div class="row">
+                <div id="left" class="col-sm-2">
+                    <ui:insert name="category" >
+                        <ui:include src="/frontend/Category/category.xhtml" />
+                    </ui:insert>
+                </div>
+                <div class="container">
+                    <div id="content" class="col-md-8">
+                        <ui:insert name="content" >
+                            <ui:include src="/frontend/template/common/content.xhtml" />
+                        </ui:insert>
+                    </div> 
+                </div>
+            </div>
+
+            <ui:insert name="footer" >
+                <ui:include src="/frontend/template/common/footer.xhtml" />
+            </ui:insert>
+        </div>
+    </h:body>
+</html>

@@ -1,0 +1,47 @@
+<?xml version='1.0' encoding='UTF-8' ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<ui:composition 
+    xmlns="http://www.w3.org/1999/xhtml"
+    xmlns:h="http://xmlns.jcp.org/jsf/html"
+    xmlns:f="http://xmlns.jcp.org/jsf/core"
+    xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
+    xmlns:a="http://xmlns.jcp.org/jsf/passthrough">
+
+    <h:form id="yorum-form">
+        <div class="form-group">
+            <h:inputHidden value="#{commentBean.yorum.comment_id}"/>
+            <div>
+                <label for="inputName">Kitap  Adı</label><br/>
+                <h:selectOneMenu class="form-control" id="selectBook" value="#{commentBean.yorum.book}" converter="bookConverter">
+                    <f:selectItems value="#{commentBean.bookBean.bookList}" var="book" itemValue="#{book}" itemLabel="#{book.book_name}" />
+                </h:selectOneMenu>
+            </div>
+            <br/>
+            <div>
+                <label for="inputName">Kullanıcı Adı</label><br/>
+                <h:selectOneMenu class="form-control" id="selectUser" value="#{commentBean.yorum.user}" converter="userConverter">
+                    <f:selectItems value="#{commentBean.userBean.userList}" var="user" itemValue="#{user}" itemLabel="#{user.name_surname}" />
+                </h:selectOneMenu>
+            </div> 
+            <br/>
+            <label for="inputName">Yorumunuz</label>
+            <h:inputTextarea styleClass="form-control" value="#{commentBean.yorum.comment}"/>
+
+
+        </div>
+        <div class="form-group">
+            <div class="btn-group">
+                <h:commandButton rendered="#{commentBean.yorum.comment_id != null}" styleClass="btn btn-info" value="Güncelle" action="#{commentBean.update}">
+                    <f:ajax execute="yorum-form" render="yorum-form yorum-table"/>
+                </h:commandButton>
+                <h:commandButton rendered="#{commentBean.yorum.comment_id  == null}" styleClass="btn btn-primary" value="Kayet" action="#{commentBean.create}">
+                    <f:ajax execute="yorum-form" render="yorum-form yorum-table"/>
+                </h:commandButton>
+                <h:commandButton rendered="#{commentBean.yorum.comment_id  != null}" styleClass="btn btn-secondary" value="Temizle" action="#{commentBean.clearForm}">
+                    <f:ajax execute="@this" render="yorum-form yorum-table"/>
+                </h:commandButton>                                                              
+            </div>
+        </div>
+    </h:form>
+
+</ui:composition>
